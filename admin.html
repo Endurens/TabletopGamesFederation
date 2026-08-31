@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Админ — Google Таблица БД</title>
+<link rel="stylesheet" href="style.css">
+<style>
+table.admin{width:100%;border-collapse:collapse;font-size:13px;}
+table.admin th{background:rgba(184,154,106,0.1);color:#c8ad86;font-family:var(--font-serif);padding:12px;text-align:left;border-bottom:1px solid rgba(184,154,106,0.2);}
+table.admin td{padding:10px 12px;border-bottom:1px solid rgba(184,154,106,0.1);color:rgba(240,232,208,0.7);}
+</style>
+</head>
+<body style="background:#06050a;color:#f0e8d0;padding:40px;max-width:1000px;margin:0 auto;">
+  <h1 style="font-family:var(--font-serif);color:#c8ad86;letter-spacing:0.06em;">База — Google Таблица</h1>
+  <p style="color:rgba(240,232,208,0.4);font-size:13px;">Таблица: <a href="https://docs.google.com/spreadsheets/d/1NaZqSG6sPy0R4GZklzRL9OdGKLD8XulXXZOOssMJoUY/edit?gid=0#gid=0" target="_blank" style="color:#c8ad86;">1NaZqSG6sPy0R4GZklzRL9OdGKLD8XulXXZOOssMJoUY</a> · Запись через Apps Script, чтение через gviz.</p>
+  <div style="display:flex;gap:12px;margin:20px 0;flex-wrap:wrap;">
+    <button id="btn-refresh" style="padding:10px 18px;background:rgba(184,154,106,0.15);border:1px solid rgba(184,154,106,0.4);color:#c8ad86;border-radius:4px;cursor:pointer;">Обновить из Таблицы</button>
+    <button id="btn-clear-cache" style="padding:10px 18px;background:rgba(180,60,60,0.12);border:1px solid rgba(180,60,60,0.4);color:#e8a0a0;border-radius:4px;cursor:pointer;">Очистить кеш</button>
+    <a href="index.html" style="padding:10px 18px;border:1px solid rgba(184,154,106,0.3);color:#c8ad86;text-decoration:none;border-radius:4px;">На главную</a>
+    <a href="https://docs.google.com/spreadsheets/d/1NaZqSG6sPy0R4GZklzRL9OdGKLD8XulXXZOOssMJoUY/edit?gid=0#gid=0" target="_blank" style="padding:10px 18px;background:rgba(184,154,106,0.08);border:1px solid rgba(184,154,106,0.2);color:#c8ad86;text-decoration:none;border-radius:4px;">Открыть Таблицу ↗</a>
+  </div>
+  <div id="status" style="font-size:12px;color:#c8ad86;margin-bottom:12px;"></div>
+  <div style="border:1px solid rgba(184,154,106,0.2);border-radius:6px;overflow:auto;"><table class="admin" id="tbl"><thead><tr><th>#</th><th>Имя</th><th>Email</th><th>Хеш пароля</th><th>Создан</th></tr></thead><tbody></tbody></table></div>
+  <div style="margin-top:20px;padding:16px;background:rgba(184,154,106,0.06);border:1px solid rgba(184,154,106,0.15);border-radius:6px;">
+    <div style="font-size:12px;color:#c8ad86;font-family:var(--font-serif);margin-bottom:8px;">Как включить запись в Таблицу:</div>
+    <ol style="font-size:12px;color:rgba(240,232,208,0.6);line-height:1.6;margin:0;padding-left:18px;">
+      <li>Открой Таблицу → Расширения → Apps Script</li>
+      <li>Вставь код из файла <code>APPS_SCRIPT.gs</code> (в папке сайта)</li>
+      <li>Деплой → Развернуть как веб-приложение → Доступ: <b>Anyone</b> → Копируй URL</li>
+      <li>Вставь URL в <code>db.js → APPS_SCRIPT_URL</code></li>
+      <li>Дай таблице доступ "Читатель для всех у кого есть ссылка" (Файл → Настройки доступа)</li>
+    </ol>
+    <div style="font-size:11px;color:rgba(240,232,208,0.3);margin-top:8px;">Без Apps Script регистрация работает в кеше (localStorage) и чтение из Таблицы — но новые записи не попадут в Таблицу пока не задеплоишь скрипт.</div>
+  </div>
+<script src="db.js"></script>
+<script>
+async function load(){
+  const status=document.getElementById('status');
+  const tb=document.querySelector('#tbl tbody');
+  status.textContent='Загрузка из Google Таблицы...';
+  try{
+    const users = await DB.fetchFromSheet();
+    status.textContent = 'Загружено: ' + users.length + ' пользователей' + (DB.APPS_SCRIPT_URL ? '' : ' (кеш, задеплой Apps Script для прямой записи)');
+    tb.innerHTML = users.length ? users.map((u,i)=>`<tr><td>${i+1}</td><td>${u.name}</td><td>${u.email}</td><td style="font-family:monospace;font-size:11px;">${u.password_hash||''}</td><td>${u.created_at||''}</td></tr>`).join('') : '<tr><td colspan=5 style="text-align:center;color:rgba(240,232,208,0.3);padding:20px;">Пусто — зарегистрируй пользователя. Проверь что первая строка в Таблице — заголовки: Name | Email | Password_hash | Created_at</td></tr>';
+  }catch(e){
+    status.textContent='Ошибка: '+e;
+    tb.innerHTML='<tr><td colspan=5 style="text-align:center;color:#e8a0a0;">Ошибка загрузки. Проверь доступ к Таблице.</td></tr>';
+  }
+}
+document.getElementById('btn-refresh').onclick=load;
+document.getElementById('btn-clear-cache').onclick=()=>{ localStorage.removeItem(DB.KEY_CACHE); localStorage.removeItem(DB.KEY_SESSION); load(); };
+load();
+</script>
+</body>
+</html>
