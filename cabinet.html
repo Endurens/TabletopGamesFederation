@@ -50,27 +50,20 @@
     </div>
 
     <!-- User card -->
-    <div class="glass-card reveal visible" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;margin-bottom:48px;overflow:hidden;">
+    <div class="glass-card reveal visible" style="display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-bottom:48px;overflow:hidden;">
       <div style="padding:28px 32px;border-right:1px solid rgba(184,154,106,0.12);">
         <div style="font-size:9px;color:#b89a6a;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:8px;font-family:var(--font-serif);">Имя</div>
         <div id="u-name" style="font-size:18px;color:#f0e8d0;font-family:var(--font-serif);letter-spacing:0.04em;">—</div>
       </div>
-      <div style="padding:28px 32px;border-right:1px solid rgba(184,154,106,0.12);">
+      <div style="padding:28px 32px;">
         <div style="font-size:9px;color:#b89a6a;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:8px;font-family:var(--font-serif);">Почта</div>
         <div id="u-email" style="font-size:15px;color:#f0e8d0;word-break:break-all;">—</div>
-      </div>
-      <div style="padding:28px 32px;">
-        <div style="font-size:9px;color:#b89a6a;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:8px;font-family:var(--font-serif);">Статус</div>
-        <div style="font-size:15px;color:#a0e8b0;">● Авторизован</div>
-        <div style="font-size:11px;color:rgba(240,232,208,0.35);margin-top:4px;">Пароль защищён хешем</div>
       </div>
     </div>
 
     <!-- Sheet section -->
-    <div class="reveal visible">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:20px;">
-        <h2 style="font-family:var(--font-serif);font-size:22px;font-weight:400;letter-spacing:0.06em;color:#f0e8d0;margin:0;text-transform:uppercase;">Таблица Лидеров</h2>
-        <a href="index.html" style="font-size:11px;color:#c8ad86;text-decoration:none;border:1px solid rgba(184,154,106,0.3);padding:8px 16px;border-radius:4px;letter-spacing:0.1em;text-transform:uppercase;font-family:var(--font-serif);">На главную</a>
+    <div class="reveal visible">      <div style="margin-bottom:20px;">
+        <h2 style="font-family:var(--font-serif);font-size:22px;font-weight:400;letter-spacing:0.06em;color:#f0e8d0;margin:0;text-transform:uppercase;">Таблица лидеров</h2>
       </div>
 
       <!-- Styled table (gviz) -->
@@ -136,17 +129,29 @@
     }
     function fetchSheet(){
       const old=document.getElementById("gvizScript"); if(old) old.remove();
+      // Save old handler to avoid conflict with db.js
+      const prevHandler = window.google && window.google.visualization && window.google.visualization.Query && window.google.visualization.Query.setResponse;
       window.google=window.google||{}; window.google.visualization=window.google.visualization||{};
       window.google.visualization.Query={ setResponse:function(data){
         const s=document.getElementById("gvizScript"); if(s) s.remove();
+        // Restore previous handler after handling (for db.js)
+        if(prevHandler) window.google.visualization.Query.setResponse = prevHandler;
+        else delete window.google.visualization.Query.setResponse;
         if(data.status!=="ok"){ iframeWrap.style.display="block"; return; }
+        // Guard: ignore users table flash (small cols) - leaders has 13 cols
+        if(!data.table || !data.table.cols || data.table.cols.length < 5){
+          console.warn("ignored flash of users table");
+          return;
+        }
         renderTable(data.table);
-
         iframeWrap.style.display="none";
       }};
       const script=document.createElement("script");
       script.id="gvizScript";
-      script.onerror=()=>{ iframeWrap.style.display="block"; };
+      script.onerror=()=>{ 
+        if(prevHandler) window.google.visualization.Query.setResponse = prevHandler;
+        iframeWrap.style.display="block"; 
+      };
       script.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&t=${Date.now()}`;
       document.head.appendChild(script);
     }
