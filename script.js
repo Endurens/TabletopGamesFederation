@@ -210,11 +210,11 @@ function __init(){
   document.querySelectorAll('.prize-card').forEach(card=>{
     card.addEventListener('mousemove',(e)=>{
       const rect=card.getBoundingClientRect();
-      const x=((e.clientX-rect.left)/rect.width-0.5)*10;
-      const y=((e.clientY-rect.top)/rect.height-0.5)*6;
-      card.style.transform=`perspective(700px) rotateX(${-y}deg) rotateY(${x}deg) translateY(-6px)`;
+      const x=((e.clientX-rect.left)/rect.width-0.5)*14;
+      const y=((e.clientY-rect.top)/rect.height-0.5)*9;
+      card.style.transform=`perspective(650px) rotateX(${-y}deg) rotateY(${x}deg) translateY(-8px) scale(1.02)`;
     });
-    card.addEventListener('mouseleave',()=>{card.style.transform='perspective(700px) rotateX(0deg) rotateY(0deg) translateY(0px)';});
+    card.addEventListener('mouseleave',()=>{card.style.transform='perspective(650px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';});
   });
 
   // --- Nav scroll ---

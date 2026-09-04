@@ -227,9 +227,18 @@ body {
 
 /* ── 3D card hover ── */
 .card-3d {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.15s ease;
   transform-style: preserve-3d;
   will-change: transform;
+}
+.prize-card {
+  transition: transform 0.15s ease !important;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition-delay: 0s !important;
+}
+.prize-card:hover {
+  box-shadow: none !important;
 }
 
 /* ── Responsive layout ── */
