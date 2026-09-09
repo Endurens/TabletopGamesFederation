@@ -54,7 +54,6 @@
   </div>
 
   <!-- Hero -->
-    <!-- Hero with same animation as main -->
   <section class="hero-section" style="min-height:72vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:140px 24px 64px;background:radial-gradient(ellipse 80% 60% at 50% 40%, rgba(184,154,106,0.07) 0%, rgba(6,5,10,0) 70%), #06050a;">
     <canvas id="constellation" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;"></canvas>
     <div id="runes-layer" style="position:absolute;inset:0;pointer-events:none;"></div>
@@ -66,14 +65,16 @@
 
     <div style="animation:fadeUp 1s 0.2s ease both;text-align:center;z-index:2;">
       <p style="font-size:10px;color:#b89a6a;letter-spacing:0.35em;text-transform:uppercase;margin-bottom:16px;font-family:var(--font-serif);">Турнирные дисциплины</p>
-      <h1 style="font-family:var(--font-serif);font-size:clamp(28px,5vw,44px);font-weight:400;letter-spacing:0.06em;color:#f0e8d0;margin:0;text-transform:uppercase;">Игры сезона</h1>
+      <h1 style="font-family:var(--font-serif);font-size:clamp(28px,5vw,44px);font-weight:400;letter-spacing:0.06em;color:#f0e8d0;margin:0;text-transform:uppercase;">Все игры</h1>
       <div style="width:80px;height:1px;background:linear-gradient(90deg, transparent, #c8ad86, transparent);margin:16px auto 0;"></div>
     </div>
-    <p style="font-size:14px;color:rgba(240,232,208,0.50);text-align:center;max-width:560px;line-height:1.7;margin:16px 0 0;animation:fadeUp 1s 0.35s ease both;z-index:2;">Три характера — одна лига. <em style="color:#c8ad86;font-style:normal;">7 Чудес</em> для скорости, <em style="color:#c8ad86;font-style:normal;">Колонизаторы</em> для переговоров, <em style="color:#c8ad86;font-style:normal;">Ticket to Ride</em> для маршрутов.</p>
+    <p style="font-size:14px;color:rgba(240,232,208,0.50);text-align:center;max-width:560px;line-height:1.7;margin:16px 0 0;animation:fadeUp 1s 0.35s ease both;z-index:2;">Все игры что будут на всех турнирах и всех играх</p>
   </section>
 
+  <!-- Три характера — одна лига. <em style="color:#c8ad86;font-style:normal;">7 Чудес</em> для скорости, <em style="color:#c8ad86;font-style:normal;">Колонизаторы</em> для переговоров, <em style="color:#c8ad86;font-style:normal;">Ticket to Ride</em> для маршрутов. -->
+
   <!-- Tabs section (kept separate, with same styling) -->
-  <section style="padding:48px 40px 0; max-width:1200px; margin:0 auto;">
+  <section style="padding:48px 40px 80px; max-width:1200px; margin:0 auto;">
 
 <!-- Tabs -->
     <div class="tabs-nav" role="tablist">
@@ -93,7 +94,7 @@
           <p class="game-desc">Античные города соревнуются за величие. За <strong>7 эпох-карточек</strong> ты построишь чудо света, соберёшь армию, науку и торговлю. Всё решает одновременный драфт — <strong>ни секунды ожидания</strong>.</p>
           <div class="game-meta">
             <div class="meta-box"><div class="meta-label">Игроков</div><div class="meta-val">3 – 7</div></div>
-            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">30′</div></div>
+            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">30 минут</div></div>
             <div class="meta-box"><div class="meta-label">Сложность</div><div class="meta-val">2.1 / 5</div></div>
           </div>
           <ul class="rules-list">
@@ -105,7 +106,9 @@
         <div style="background:rgba(6,5,10,0.6); border:1px solid rgba(184,154,106,0.14); border-radius:4px; padding:28px; display:flex; flex-direction:column; gap:18px;">
           <div style="height:180px; background:radial-gradient(ellipse at 50% 40%, rgba(184,154,106,0.12), transparent 70%), linear-gradient(180deg, rgba(184,154,106,0.06), transparent); border:1px solid rgba(184,154,106,0.12); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:72px; color:#c8ad86; opacity:0.9;">Ⅶ</div>
           <div style="font-size:11px; color:rgba(240,232,208,0.35); line-height:1.6;">Механики: драфт, engine building, сеты.<br>Автор: Antoine Bauza · 2010 · Kennerspiel des Jahres</div>
-          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="#" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Правила PDF</a></div>
+          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/download/rules/7_chudes_2020_Rules.pdf" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Правила 7 Чудес</a></div>
+          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/download/rules/7_chudes_2020_Opisaniye_Effectov.pdf" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Эффекты карт для 7 чудес</a></div>
+          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/download/rules/7_chudes_2020_Spisok_Cepochek_Kart.pdf" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Список цепочек карт для 7 чудес</a></div>
         </div>
       </div>
     </div>
@@ -121,7 +124,7 @@
           <p class="game-desc">Остров Катан ждёт поселенцев. Собирай <strong>ресурсы</strong>, строй дороги и города, торгуйся до хрипоты. Кубик решает, а <strong>переговоры решают всё</strong>.</p>
           <div class="game-meta">
             <div class="meta-box"><div class="meta-label">Игроков</div><div class="meta-val">3 – 4 <span style="font-size:11px; color:rgba(240,232,208,0.4);">(6 с доп.)</span></div></div>
-            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">75′</div></div>
+            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">75 минут</div></div>
             <div class="meta-box"><div class="meta-label">Сложность</div><div class="meta-val">2.3 / 5</div></div>
           </div>
           <ul class="rules-list">
@@ -135,7 +138,8 @@
             <svg viewBox="0 0 120 120" width="90" height="90" style="opacity:0.85;"><polygon points="60,12 98,34 98,78 60,100 22,78 22,34" fill="none" stroke="#c8ad86" stroke-width="1.6"/><polygon points="60,12 60,48 98,34" fill="rgba(184,154,106,0.12)" stroke="#c8ad86" stroke-width="0.8"/><circle cx="60" cy="56" r="6" fill="#c8ad86"/></svg>
           </div>
           <div style="font-size:11px; color:rgba(240,232,208,0.35); line-height:1.6;">Механики: гекс-контроль, торговля, кубик.<br>Автор: Klaus Teuber · 1995 · Spiel des Jahres</div>
-          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="#" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Правила PDF</a></div>
+          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/download/rules/catan-rules.pdf" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Правила Колонизаторов</a></div>
+          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/assets/docs/catan_almanach_ru.pdf" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Альманах для Колонизаторов</a></div>
         </div>
       </div>
     </div>
@@ -151,7 +155,7 @@
           <p class="game-desc">Железные дороги Америки. Собирай <strong>вагоны</strong>, занимай перегоны и выполняй маршруты. Простые правила, <strong>глубокая блокада</strong> соперников.</p>
           <div class="game-meta">
             <div class="meta-box"><div class="meta-label">Игроков</div><div class="meta-val">2 – 5</div></div>
-            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">45′</div></div>
+            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">45 минут</div></div>
             <div class="meta-box"><div class="meta-label">Сложность</div><div class="meta-val">1.8 / 5</div></div>
           </div>
           <ul class="rules-list">
@@ -165,7 +169,7 @@
             <span style="width:36px;height:8px;background:#c8ad86;border-radius:2px;box-shadow:0 0 12px rgba(200,173,134,0.5);"></span><span style="width:36px;height:8px;background:transparent;border:1px solid #c8ad86;border-radius:2px;border-style:dashed;opacity:0.5;"></span><span style="width:36px;height:8px;background:#c8ad86;border-radius:2px;"></span>
           </div>
           <div style="font-size:11px; color:rgba(240,232,208,0.35); line-height:1.6;">Механики: сбор сетов, контроль карты.<br>Автор: Alan R. Moon · 2004 · Spiel des Jahres</div>
-          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="#" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Правила PDF</a></div>
+          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/download/rules/T2RE_rules_new.PDF" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Правила Ticket to Ride</a></div>
         </div>
       </div>
     </div>
@@ -273,5 +277,6 @@
   </script>
 </body>
 </html>
+
 
 
