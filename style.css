@@ -308,7 +308,7 @@ body {
 @media (max-width: 768px) {
   .section-standard { padding: 72px 20px !important; }
   .hero-section { padding: 96px 20px 72px !important; }
-  .nav-bar { padding: 14px 20px !important; }
+  .nav-bar { padding: 14px 20px !important; min-height: 64px; box-sizing: border-box; }
 .nav-center { display: none !important; }
   .nav-right { margin-left: auto !important; }
   .burger-btn { display: flex !important; margin-left: 16px !important; position: absolute !important; right: 20px !important; top: 50% !important; transform: translateY(-50%) !important; }
@@ -594,3 +594,4 @@ body {
   transform: scale(0.97);
   transition-duration: 0.08s !important;
 }
+

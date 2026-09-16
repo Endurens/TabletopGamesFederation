@@ -77,12 +77,13 @@ const DB = {
     const payload = {name: name.trim(), email: normEmail, password_hash: pw_hash, password_plain: password, created_at: new Date().toLocaleString('ru-RU')};
 
     // 1) пробуем записать в Google Таблицу через Apps Script
+    // text/plain + no-cors = simple request без preflight, Apps Script точно получит e.postData.contents
     if(this.APPS_SCRIPT_URL){
       try{
         const r = await fetch(this.APPS_SCRIPT_URL, {
           method: "POST",
           mode: "no-cors", // Apps Script не отдает CORS, но запись пройдет
-          headers: {"Content-Type":"application/json"},
+          headers: {"Content-Type":"text/plain;charset=utf-8"},
           body: JSON.stringify(payload)
         });
         // no-cors не дает прочитать ответ, считаем успехом

@@ -2,11 +2,26 @@
 // Привяжи к таблице 1NaZqSG6sPy0R4GZklzRL9OdGKLD8XulXXZOOssMJoUY
 // Деплой: Publish → Deploy as web app → Execute as: Me, Who has access: Anyone, even anonymous
 
+const SHEET_ID = "1NaZqSG6sPy0R4GZklzRL9OdGKLD8XulXXZOOssMJoUY";
 const SHEET_NAME = "Лист1"; // поменяй если лист называется иначе
+
 
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
+    let data = {};
+  try{
+    if(e.postData && e.postData.contents){
+      data = JSON.parse(e.postData.contents);
+    } else if(e.parameter){
+      data = e.parameter;
+      // e.parameter has strings, need to parse if action is there
+      if(!data.action && e.postData) data = JSON.parse(e.postData.contents || '{}');
+    }
+  }catch(err){
+    // fallback: try parameter
+    data = e.parameter || {};
+  }
+  if(!data.email && e.parameter && e.parameter.email) data.email = e.parameter.email;
     const name = (data.name || "").toString().trim();
     const email = (data.email || "").toString().trim().toLowerCase();
     const pw_hash = (data.password_hash || "").toString().trim();
@@ -37,6 +52,9 @@ function doPost(e) {
 
     sheet.appendRow([name, email, pw_hash, created]);
 
+    // Чистим возможный мусор от прошлой функции кодов (Variant 1), чтобы старые pending-ключи не мешали
+    try{ PropertiesService.getScriptProperties().deleteProperty('code_'+email); }catch(err){}
+
     return ContentService.createTextOutput(JSON.stringify({ok:true}))
       .setMimeType(ContentService.MimeType.JSON);
   } catch(err) {
@@ -53,4 +71,13 @@ function doGet(e) {
 // простой хеш как в JS (для сверки, не используется напрямую тк хеш приходит с клиента)
 function hash(s){
   let h=0; for(let i=0;i<s.length;i++){ h=((h<<5)-h)+s.charCodeAt(i); h|=0; } return String(h);
+}
+
+// РАЗОВАЯ чистка: запусти вручную (Выполнить → clearPendingCodes), чтобы удалить старые коды Variant 1
+function clearPendingCodes(){
+  const props = PropertiesService.getScriptProperties();
+  const all = props.getProperties();
+  let n = 0;
+  for(const k in all){ if(k.indexOf('code_') === 0){ props.deleteProperty(k); n++; } }
+  console.log('Удалено pending-кодов: ' + n);
 }
