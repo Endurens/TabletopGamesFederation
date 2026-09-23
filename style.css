@@ -168,13 +168,6 @@ body {
   pointer-events: none;
 }
 
-/* ── Shooting star ── */
-@keyframes shoot {
-  0%   { transform: translateX(0) translateY(0) scaleX(0); opacity: 0; }
-  5%   { opacity: 1; transform: translateX(0) translateY(0) scaleX(1); }
-  100% { transform: translateX(600px) translateY(200px) scaleX(1); opacity: 0; }
-}
-
 /* ── Glitch ── */
 @keyframes glitch1 {
   0%,100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
@@ -317,16 +310,17 @@ body {
   .footer-section { padding: 56px 20px 36px !important; }
 
   .two-col-grid { display: flex !important; flex-direction: column !important; gap: 0 !important; }
-  .swiss-two-col { display: flex !important; flex-direction: column !important; gap: 48px !important; }
+  .swiss-two-col { display: flex !important; flex-direction: column !important; gap: 48px !important; align-items: stretch !important; }
+  .swiss-two-col > div { width: 100% !important; }
   .stats-grid { gap: 20px !important; }
 
   .how-grid { border-left: none !important; border-right: none !important; }
   .how-cell { border-right: none !important; border-bottom: 1px solid rgba(184,154,106,0.15) !important; padding: 36px 20px !important; }
   .how-cell:last-child { border-bottom: none !important; }
 
-  .schedule-table { padding: 0 !important; }
+  .schedule-table { padding: 0 !important; width: 100% !important; }
   .schedule-row { padding: 14px 16px !important; }
-  .schedule-card { padding: 28px 20px !important; }
+  .schedule-card { padding: 28px 20px !important; width: 100% !important; box-sizing: border-box !important; }
 
   .hide-mobile { display: none !important; }
 
@@ -535,7 +529,7 @@ body {
 #btn-register, #btn-cabinet, #btn-logout {
   box-shadow: 0 0 16px rgba(184,154,106,0.28) !important;
 }
-#btn-games, #btn-home {
+#btn-games, #btn-home, #btn-events {
   background: transparent !important;
   border: none;
   box-shadow: none !important;
@@ -544,17 +538,17 @@ body {
   padding: 6px 4px !important;
   position: relative;
 }
-#btn-games:hover, #btn-home:hover {
+#btn-games:hover, #btn-home:hover, #btn-events:hover {
   background: transparent !important;
   border: none;
   box-shadow: none !important;
   color: #f0e8d0 !important;
 }
-#btn-games.active, #btn-home.active {
+#btn-games.active, #btn-home.active, #btn-events.active {
   color: #f0e8d0 !important;
   border-bottom: 1px solid #c8ad86 !important;
 }
-#btn-games::after, #btn-home::after {
+#btn-games::after, #btn-home::after, #btn-events::after {
   content: '';
   position: absolute;
   left: 0; right: 0; bottom: -2px;
@@ -563,7 +557,7 @@ body {
   transform: scaleX(0);
   transition: transform 0.25s ease;
 }
-#btn-games:hover::after, #btn-home:hover::after {
+#btn-games:hover::after, #btn-home:hover::after, #btn-events:hover::after {
   transform: scaleX(1);
 }
 #btn-login:hover {

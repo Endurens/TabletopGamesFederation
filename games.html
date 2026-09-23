@@ -1,4 +1,4 @@
-﻿<!doctype html>
+﻿  <!doctype html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -26,7 +26,7 @@
     .rules-list { margin:20px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; }
     .rules-list li { display:flex; gap:12px; font-size:13px; color:rgba(240,232,208,0.55); line-height:1.6; }
     .rules-list li span:first-child { color:#c8ad86; margin-top:2px; flex-shrink:0; }
-    @media (max-width:900px){ .game-card { grid-template-columns:1fr; gap:32px; padding:28px 20px; } .tabs-nav { width:100%; } .tab-btn { flex:1; padding:12px 12px; font-size:10px; } .game-meta { grid-template-columns:1fr; } }
+    @media (max-width:900px){ .game-card { grid-template-columns:1fr; gap:32px; padding:28px 20px; } .tabs-nav { display:grid; grid-template-columns:1fr 1fr; width:100%; } .tab-btn { padding:12px 8px; font-size:10px; white-space:normal; line-height:1.5; border-right:none; border-bottom:1px solid rgba(184,154,106,0.15); } .tab-btn:nth-child(odd) { border-right:1px solid rgba(184,154,106,0.15); } .tab-btn:nth-last-child(-n+2) { border-bottom:none; } .game-meta { grid-template-columns:1fr; } }
     @keyframes fadeUp { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)} }
   </style>
 </head>
@@ -35,6 +35,7 @@
     <div class="nav-center" style="position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:28px;align-items:center;">
       <a href="index.html" id="btn-home" style="background:transparent;border:none;box-shadow:none;color:rgba(240,232,208,0.62);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:6px 4px;text-decoration:none;font-family:var(--font-serif);transition:color 0.2s; cursor:pointer;">Главная</a>
       <a href="games.html" id="btn-games" class="active" style="background:transparent;border:none;box-shadow:none;color:#f0e8d0;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:6px 4px 5px;text-decoration:none;font-family:var(--font-serif);transition:color 0.2s; cursor:pointer; border-bottom:1px solid #c8ad86;">Игры</a>
+      <a href="index.html#schedule" id="btn-events" style="background:transparent;border:none;box-shadow:none;color:rgba(240,232,208,0.62);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:6px 4px;text-decoration:none;font-family:var(--font-serif);transition:color 0.2s; cursor:pointer;">События</a>
     </div>
     <div class="nav-right" style="display:flex;gap:12px;align-items:center;margin-left:auto;">
       <span id="nav-user" style="font-size:12px;color:rgba(240,232,208,0.92);font-family:var(--font-serif);display:none;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
@@ -51,6 +52,7 @@
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <a href="index.html" class="mobile-link" data-page="home">Главная</a>
     <a href="games.html" class="mobile-link" data-page="games">Игры</a>
+    <a href="index.html#schedule" class="mobile-link" data-page="events">События</a>
   </div>
 
   <!-- Hero -->
@@ -61,7 +63,6 @@
 
     <div id="nebula" style="position:absolute;width:600px;height:400px;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse, rgba(184,154,106,0.12) 0%, transparent 70%);animation:pulseGlow 6s ease-in-out infinite;pointer-events:none;"></div>
     <div id="orbit-layer" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);pointer-events:none;"></div>
-    <div id="shooting-stars" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;"></div>
 
     <div style="animation:fadeUp 1s 0.2s ease both;text-align:center;z-index:2;">
       <p style="font-size:10px;color:#b89a6a;letter-spacing:0.35em;text-transform:uppercase;margin-bottom:16px;font-family:var(--font-serif);">Турнирные дисциплины</p>
@@ -79,8 +80,9 @@
 <!-- Tabs -->
     <div class="tabs-nav" role="tablist">
       <button class="tab-btn active" data-tab="wonders" role="tab" aria-selected="true">7 Чудес</button>
-      <button class="tab-btn" data-tab="catan" role="tab">Колонизаторы</button>
-      <button class="tab-btn" data-tab="ttr" role="tab">Ticket to Ride</button>
+      <button class="tab-btn" data-tab="catan" role="tab">Catan: Колонизаторы</button>
+      <button class="tab-btn" data-tab="ttr" role="tab">Ticket to Ride: Европа</button>
+      <button class="tab-btn" data-tab="citadels" role="tab">Цитадели</button>
     </div>
 
     <!-- 7 Wonders -->
@@ -88,24 +90,24 @@
       <div class="game-card">
         <div>
           <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
-            <span class="tag">3–7 игроков</span><span class="tag">30 мин</span><span class="tag">Драфт</span><span class="tag">Хит сезона</span>
+            <span class="tag">3 - 7 игроков</span><span class="tag">30 - 40 мин</span><span class="tag">Драфт</span>
           </div>
           <h2 style="font-family:var(--font-serif);font-size:26px;font-weight:400;letter-spacing:0.05em;color:#f0e8d0;margin:0 0 12px;text-transform:uppercase;">7 Чудес</h2>
-          <p class="game-desc">Античные города соревнуются за величие. За <strong>7 эпох-карточек</strong> ты построишь чудо света, соберёшь армию, науку и торговлю. Всё решает одновременный драфт — <strong>ни секунды ожидания</strong>.</p>
+          <p class="game-desc">Античные города под вашим руководством соревнуются за величие. Разработка ресурсов, развитие торговли и науки, укрепление военной мощи и строительство Чудес Света — все это поможет достичь главной цели: победы! Одновременные ходы и постоянная смена карт сделают борьбу поистине динамичной и непредсказуемой. Какую стратегию развития вы выберете?</p>
           <div class="game-meta">
-            <div class="meta-box"><div class="meta-label">Игроков</div><div class="meta-val">3 – 7</div></div>
-            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">30 минут</div></div>
+            <div class="meta-box"><div class="meta-label">Игроков</div><div class="meta-val">3 - 7</div></div>
+            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">30 - 40 минут</div></div>
             <div class="meta-box"><div class="meta-label">Сложность</div><div class="meta-val">2.1 / 5</div></div>
-          </div>
+          </div>  
           <ul class="rules-list">
-            <li><span>◆</span><span><strong>Формат турнира:</strong> 4 стола по 7, топ-8 в финал. Швейцарка 5 туров.</span></li>
-            <li><span>◆</span><span><strong>Победа:</strong> сумма военных, научных, гражданских и коммерческих очков.</span></li>
-            <li><span>◆</span><span><strong>Фишка лиги:</strong> все играют одновременно — идеальна для 30+ участников.</span></li>
+            <li><span>◆</span><span><strong>Формат турнира:</strong> версия 2020 года, столы по 3-6 человек, три тура, швейцарская система</span></li>
+            <li><span>◆</span><span><strong>Победа:</strong> сумма очков по всем категориям (Чудеса Света, сокровищница, военные победы, гражданские, торговые и научные постройки, развитие гильдий)</span></li>
+            <li><span>◆</span><span><strong>Фишка игры:</strong> одновременный драфт (выбор и розыгрыш карт эпох)</span></li>
           </ul>
         </div>
         <div style="background:rgba(6,5,10,0.6); border:1px solid rgba(184,154,106,0.14); border-radius:4px; padding:28px; display:flex; flex-direction:column; gap:18px;">
           <div style="height:180px; background:radial-gradient(ellipse at 50% 40%, rgba(184,154,106,0.12), transparent 70%), linear-gradient(180deg, rgba(184,154,106,0.06), transparent); border:1px solid rgba(184,154,106,0.12); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:72px; color:#c8ad86; opacity:0.9;">Ⅶ</div>
-          <div style="font-size:11px; color:rgba(240,232,208,0.35); line-height:1.6;">Механики: драфт, engine building, сеты.<br>Автор: Antoine Bauza · 2010 · Kennerspiel des Jahres</div>
+          <div style="font-size:11px; color:rgba(240,232,208,0.35); line-height:1.6;"><strong>Механики:</strong> драфт, engine building, сеты.<br><strong>Автор:</strong> Антуан Боза<br><strong>Издательство:</strong> Настольные игры «Стиль Жизни» (РФ), Repos Production (Бельгия)</div>
           <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/download/rules/7_chudes_2020_Rules.pdf" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Правила 7 Чудес</a></div>
           <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/download/rules/7_chudes_2020_Opisaniye_Effectov.pdf" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Эффекты карт для 7 чудес</a></div>
           <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/download/rules/7_chudes_2020_Spisok_Cepochek_Kart.pdf" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Список цепочек карт для 7 чудес</a></div>
@@ -118,19 +120,19 @@
       <div class="game-card">
         <div>
           <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
-            <span class="tag">3–4 игрока</span><span class="tag">75 мин</span><span class="tag">Торги</span><span class="tag">Классика</span>
+            <span class="tag">3 - 4 игрока</span><span class="tag">75 мин</span><span class="tag">Торги</span><span class="tag">Классика</span>
           </div>
-          <h2 style="font-family:var(--font-serif);font-size:26px;font-weight:400;letter-spacing:0.05em;color:#f0e8d0;margin:0 0 12px;text-transform:uppercase;">Колонизаторы</h2>
-          <p class="game-desc">Остров Катан ждёт поселенцев. Собирай <strong>ресурсы</strong>, строй дороги и города, торгуйся до хрипоты. Кубик решает, а <strong>переговоры решают всё</strong>.</p>
+          <h2 style="font-family:var(--font-serif);font-size:26px;font-weight:400;letter-spacing:0.05em;color:#f0e8d0;margin:0 0 12px;text-transform:uppercase;">Catan: Колонизаторы</h2>
+          <p class="game-desc">Освоение необитаемого, но богатого ресурсами острова Катан потребует от вас стратегического мышления, умения торговаться и договариваться с соседями, а Госпожа Удача станет вашей покровительницей, если вы ей приглянетесь. Строительство дорог, поселений и городов превратит дикие земли в настоящий культурный и промышленный центр. Отважные рыцари, научные открытия и возведение зданий помогут вам проложить путь к победе. А на что сделаете ставку вы, чтобы привести свой народ к процветанию?</p>
           <div class="game-meta">
-            <div class="meta-box"><div class="meta-label">Игроков</div><div class="meta-val">3 – 4 <span style="font-size:11px; color:rgba(240,232,208,0.4);">(6 с доп.)</span></div></div>
-            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">75 минут</div></div>
+            <div class="meta-box"><div class="meta-label">Игроков</div><div class="meta-val">3 - 4 <span style="font-size:11px; color:rgba(240,232,208,0.4);">(6 с доп.)</span></div></div>
+            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">60 - 75 минут</div></div>
             <div class="meta-box"><div class="meta-label">Сложность</div><div class="meta-val">2.3 / 5</div></div>
           </div>
           <ul class="rules-list">
-            <li><span>⬢</span><span><strong>Формат турнира:</strong> группы по 4, победа — 10 очков. Финал на 4 стола.</span></li>
-            <li><span>⬢</span><span><strong>Баланс:</strong> играем без дополнений, разбойник — по классике.</span></li>
-            <li><span>⬢</span><span><strong>Фишка лиги:</strong> переговоры разрешены, союзы — нет.</span></li>
+            <li><span>⬢</span><span><strong>Формат турнира:</strong> турнира: столы по 3-4 человека, три игры, швейцарская система</span></li>
+            <li><span>⬢</span><span><strong>Победа:</strong> первым набрать 10 победных очков</span></li>
+            <li><span>⬢</span><span><strong>Фишка игры:</strong> переговоры разрешены, союзы – нет</span></li>
           </ul>
         </div>
         <div style="background:rgba(6,5,10,0.6); border:1px solid rgba(184,154,106,0.14); border-radius:4px; padding:28px; display:flex; flex-direction:column; gap:18px;">
@@ -149,27 +151,55 @@
       <div class="game-card">
         <div>
           <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
-            <span class="tag">2–5 игроков</span><span class="tag">45 мин</span><span class="tag">Маршруты</span><span class="tag">Семейная</span>
+            <span class="tag">2 - 5 игроков</span><span class="tag">45 - 60 мин</span><span class="tag">Маршруты</span>
           </div>
           <h2 style="font-family:var(--font-serif);font-size:26px;font-weight:400;letter-spacing:0.05em;color:#f0e8d0;margin:0 0 12px;text-transform:uppercase;">Ticket to Ride</h2>
-          <p class="game-desc">Железные дороги Америки. Собирай <strong>вагоны</strong>, занимай перегоны и выполняй маршруты. Простые правила, <strong>глубокая блокада</strong> соперников.</p>
+          <p class="game-desc">Увлекательное путешествие по городам и странам Европы начала ХХ века, строительство железнодорожных перегонов, туннелей и паромов, мудрое использование станций — все это расширит ваш кругозор, разовьет стратегическое мышление и пробудит в вас коммерческую жилку. Ведь каждый построенный перегон и законченный маршрут принесут вам победные очки и звание железнодорожного магната! А может, именно вы сможете запустить самый длинный «Европейский экспресс»?</p>
           <div class="game-meta">
-            <div class="meta-box"><div class="meta-label">Игроков</div><div class="meta-val">2 – 5</div></div>
-            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">45 минут</div></div>
+            <div class="meta-box"><div class="meta-label">Игроков</div><div class="meta-val">2 - 5</div></div>
+            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">45 - 60 минут</div></div>
             <div class="meta-box"><div class="meta-label">Сложность</div><div class="meta-val">1.8 / 5</div></div>
           </div>
           <ul class="rules-list">
-            <li><span>─</span><span><strong>Формат турнира:</strong> карта США, 3 партии, сумма очков.</span></li>
-            <li><span>─</span><span><strong>Маршруты:</strong> длинные 20+, короткие 5–13. Не выполнил — минус.</span></li>
-            <li><span>─</span><span><strong>Фишка лиги:</strong> самый быстрый вход для новичков.</span></li>
+            <li><span>─</span><span><strong>Формат турнира:</strong>  карта Европы, столы по 3-5 человек, 3 игры, швейцарская система</span></li>
+            <li><span>─</span><span><strong>Победа:</strong> сумма очков за каждый построенный перегон и выполненный маршрут, незавершенные маршруты вычитаются, дополнительные очки за постройку Европейского экспресса</span></li>
+            <li><span>─</span><span><strong>Фишка игры:</strong> маршруты и перегоны можно строить вразнобой (занимайте любые свободные пути в любом порядке и в любой части карты)</span></li>
           </ul>
         </div>
         <div style="background:rgba(6,5,10,0.6); border:1px solid rgba(184,154,106,0.14); border-radius:4px; padding:28px; display:flex; flex-direction:column; gap:18px;">
           <div style="height:180px; background:radial-gradient(ellipse at 50% 40%, rgba(184,154,106,0.10), transparent 70%), linear-gradient(180deg, rgba(184,154,106,0.05), transparent); border:1px solid rgba(184,154,106,0.12); border-radius:4px; display:flex; align-items:center; justify-content:center; gap:10px;">
             <span style="width:36px;height:8px;background:#c8ad86;border-radius:2px;box-shadow:0 0 12px rgba(200,173,134,0.5);"></span><span style="width:36px;height:8px;background:transparent;border:1px solid #c8ad86;border-radius:2px;border-style:dashed;opacity:0.5;"></span><span style="width:36px;height:8px;background:#c8ad86;border-radius:2px;"></span>
           </div>
-          <div style="font-size:11px; color:rgba(240,232,208,0.35); line-height:1.6;">Механики: сбор сетов, контроль карты.<br>Автор: Alan R. Moon · 2004 · Spiel des Jahres</div>
-          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/download/rules/T2RE_rules_new.PDF" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Правила Ticket to Ride</a></div>
+          <div style="font-size:11px; color:rgba(240,232,208,0.35); line-height:1.6;"><strong>Механики:</strong> сбор сетов, контроль карты.<br><strong>Автор:</strong> Алан Р. Мун<br><strong>Издательство:</strong> Hobby World (РФ), Days of Wonder (США)</div>
+          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/download/rules/T2RE_rules_new.PDF" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Правила Ticket to Ride: Европа</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Citadels -->
+    <div id="tab-citadels" class="tab-content">
+      <div class="game-card">
+        <div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
+            <span class="tag">2 - 8 игроков</span><span class="tag">45 - 60 мин</span><span class="tag">Роли</span><span class="tag">Блеф</span>
+          </div>
+          <h2 style="font-family:var(--font-serif);font-size:26px;font-weight:400;letter-spacing:0.05em;color:#f0e8d0;margin:0 0 12px;text-transform:uppercase;">Цитадели</h2>
+          <p class="game-desc">Постройте самый великолепный средневековый город с помощью уникальных персонажей! Превратить ваше поселение в богатейшую столицу поможет умелое сочетание точного расчета, блефа и интриг. Каждый раунд здесь — это скрытая психологическая дуэль, ведь никто вокруг не знает, какую роль вы примерите на себя в этот раз. Сможете ли вы прочитать чужие мысли, защитить свое золото и стать величайшим градостроителем Средневековья?</p>
+          <div class="game-meta">
+            <div class="meta-box"><div class="meta-label">Игроков</div><div class="meta-val">4 - 6</div></div>
+            <div class="meta-box"><div class="meta-label">Время</div><div class="meta-val">30 - 0 минут</div></div>
+            <div class="meta-box"><div class="meta-label">Сложность</div><div class="meta-val">2.0 / 5</div></div>
+          </div>
+          <ul class="rules-list">
+            <li><span>♛</span><span><strong>Формат турнира:</strong> столы по 4 - 6 человек, три тура, швейцарская система</span></li>
+            <li><span>♛</span><span><strong>Победа:</strong> очки за стоимость кварталов плюс бонусы: +4 первому достроившему 8 кварталов, +3 за кварталы всех 5 цветов</span></li>
+            <li><span>♛</span><span><strong>Фишка игры:</strong> тайный выбор ролей, блеф и дедукция — угадайте, кто есть кто</span></li>
+          </ul>
+        </div>
+        <div style="background:rgba(6,5,10,0.6); border:1px solid rgba(184,154,106,0.14); border-radius:4px; padding:28px; display:flex; flex-direction:column; gap:18px;">
+          <div style="height:180px; background:radial-gradient(ellipse at 50% 40%, rgba(184,154,106,0.12), transparent 70%), linear-gradient(180deg, rgba(184,154,106,0.06), transparent); border:1px solid rgba(184,154,106,0.12); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:72px; color:#c8ad86; opacity:0.9;">♛</div>
+          <div style="font-size:11px; color:rgba(240,232,208,0.35); line-height:1.6;"><strong>Механики:</strong> выбор ролей, блеф, строительство.<br><strong>Автор:</strong> Бруно Файдутти<br><strong>Издательство:</strong> Hobby World (РФ), Z-Man Games (США)</div>
+          <div class="cosmic-btn-wrap" style="width:100%; margin-top:8px;"><a href="https://hobbygames.ru/citadeli-classic/rules" class="cosmic-btn" style="width:100%; text-align:center; display:block; text-decoration:none;">Правила Цитадели</a></div>
         </div>
       </div>
     </div>

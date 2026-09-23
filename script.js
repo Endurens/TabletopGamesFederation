@@ -30,15 +30,6 @@ function __init(){
     runesLayer.appendChild(d);
   } } // end runesLayer
 
-  // --- Shooting stars ---
-  const ssContainer=document.getElementById('shooting-stars'); if(ssContainer){
-  const ssData=[{delay:2,top:'15%',left:'10%'},{delay:5.5,top:'30%',left:'60%'},{delay:9,top:'8%',left:'35%'},{delay:13,top:'45%',left:'5%'},{delay:17,top:'22%',left:'75%'}];
-  ssData.forEach(s=>{
-    const d=document.createElement('div');
-    d.style.cssText=`position:absolute;top:${s.top};left:${s.left};width:120px;height:1.5px;background:linear-gradient(90deg, transparent, #c8ad86, rgba(200,173,134,0.3));border-radius:4px;animation:shoot 2.4s ${s.delay}s ease-out infinite;opacity:0;pointer-events:none;transform-origin:left center;`;
-    ssContainer.appendChild(d);
-  }); } // end ss
-
   // --- Hex floaters ---
   const hexLayer=document.getElementById('hex-layer'); if(hexLayer){
   const hexData=isMobile?[]:[
@@ -312,7 +303,7 @@ function __init(){
     if(a.id==='hero-cta') return; // у hero своя логика выше
     a.addEventListener('click',(e)=>{
       const id=a.getAttribute('href');
-      if(id.length<2) return;
+      if(id.length<2||id[0]!=='#') return;
       const t=document.querySelector(id);
       if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
     });

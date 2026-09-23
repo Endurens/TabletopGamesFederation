@@ -12,6 +12,7 @@
     <div class="nav-center" style="position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:28px;align-items:center;">
       <a href="index.html" id="btn-home" class="active" style="background:transparent;border:none;box-shadow:none;color:#f0e8d0;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:6px 4px 5px;text-decoration:none;font-family:var(--font-serif);transition:color 0.2s; cursor:pointer; border-bottom:1px solid #c8ad86;">Главная</a>
       <a href="games.html" id="btn-games" style="background:transparent;border:none;box-shadow:none;color:rgba(240,232,208,0.62);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:6px 4px;text-decoration:none;font-family:var(--font-serif);transition:color 0.2s; cursor:pointer;">Игры</a>
+      <a href="#schedule" id="btn-events" style="background:transparent;border:none;box-shadow:none;color:rgba(240,232,208,0.62);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:6px 4px;text-decoration:none;font-family:var(--font-serif);transition:color 0.2s; cursor:pointer;">События</a>
     </div>
     <div class="nav-right" style="display:flex;gap:12px;align-items:center;margin-left:auto;">
       <span id="nav-user" style="font-size:12px;color:rgba(240, 232, 208, 0.92);font-family:var(--font-serif);display:none;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
@@ -20,13 +21,16 @@
       <button id="btn-register" style="background:rgba(184,154,106,0.30);border:1px solid #e8c99a;border-radius:4px;color:#fff8e6;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;padding:9px 22px;cursor:pointer;font-family:var(--font-serif);transition:all 0.25s;box-shadow:0 0 18px rgba(200,173,134,0.38), 0 2px 12px rgba(184,154,106,0.28);">Регистрация</button>
       <button id="btn-logout" style="display:none;background:rgba(180,60,60,0.22);border:1px solid rgba(232,160,160,0.85);border-radius:4px;color:#ffdddd;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;padding:9px 22px;cursor:pointer;font-family:var(--font-serif);">Выйти</button>
       <a id="btn-cabinet" href="cabinet.html" style="display:none;background:rgba(184,154,106,0.24);border:1px solid rgba(184,154,106,0.78);border-radius:4px;color:#fff2d6;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:9px 18px;text-decoration:none;font-family:var(--font-serif);">Кабинет</a>
-        <button id="burger-btn" class="burger-btn" style="margin-left:16px;" aria-label="Меню" aria-expanded="false"></button>
+      <button id="burger-btn" class="burger-btn" style="margin-left:16px;" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
   <!-- Mobile burger menu -->
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <a href="index.html" class="mobile-link" data-page="home">Главная</a>
     <a href="games.html" class="mobile-link" data-page="games">Игры</a>
+    <a href="#schedule" class="mobile-link" data-page="events">События</a>
   </div>
 
   <!-- Hero -->
@@ -39,9 +43,6 @@
     <div id="nebula" style="position:absolute;width:600px;height:400px;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse, rgba(184,154,106,0.12) 0%, transparent 70%);animation:pulseGlow 6s ease-in-out infinite;pointer-events:none;"></div>
     <!-- Orbit rings container -->
     <div id="orbit-layer" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);pointer-events:none;"></div>
-    <!-- Shooting stars container -->
-    <div id="shooting-stars" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;"></div>
-
     <!-- Logo -->
     <div style="position:relative;margin-bottom:48px;z-index:2;" id="hero-logo-wrap">
       <div style="position:absolute;inset:-40px;background:radial-gradient(ellipse, rgba(184,154,106,0.2) 0%, transparent 70%);border-radius:50%;animation:pulseGlow 5s ease-in-out infinite;pointer-events:none;"></div>
